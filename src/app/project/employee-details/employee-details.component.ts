@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup , FormBuilder , FormControl } from '@angular/forms'
 
 @Component({
   selector: 'app-employee-details',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }
+
+  profileForm = this.fb.group({
+    employeeId: [''],
+    employeeName: [''],
+    employeeMobile: ['']
+  })
 
 }
