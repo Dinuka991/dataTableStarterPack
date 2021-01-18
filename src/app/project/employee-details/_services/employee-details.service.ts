@@ -14,7 +14,7 @@ export class EmployeeDetailsService {
     return this.http.get<any>('http://localhost:8080/employee-services/download/employee.xlsx' ,   {responseType: 'blob' as 'json'});
   }
 
-  getAllData(): Observable<any>{
+  getAllData(): Observable<Employee>{
     return this.http.get<Employee>('http://localhost:8080/employee-services/all');
   }
       

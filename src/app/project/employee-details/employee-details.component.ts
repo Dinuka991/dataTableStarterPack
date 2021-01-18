@@ -18,14 +18,18 @@ export class EmployeeDetailsComponent implements OnInit {
   dataSource = new MatTableDataSource<Employee>();
 
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
+  @ViewChild(MatPaginator, { static: true })
+  paginator!: MatPaginator;
 
  
   constructor(private fb: FormBuilder , private employeeDetailsService: EmployeeDetailsService) { }
 
   ngOnInit(): void {
+  
+      this.dataSource.paginator = this.paginator;
+    
   }
-
+ 
   profileForm = this.fb.group({
     employeeId: [''],
     employeeName: [''],
