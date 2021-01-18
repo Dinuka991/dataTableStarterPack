@@ -9,6 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http'
+import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 
@@ -24,7 +26,9 @@ import { HttpClientModule } from '@angular/common/http'
     ReactiveFormsModule,
     MatButtonModule,
     FlexLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatPaginatorModule
     
     
   ],
