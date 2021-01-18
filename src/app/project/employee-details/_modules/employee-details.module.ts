@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input'
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button'
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http'
 
 
 
@@ -22,7 +23,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatInputModule,
     ReactiveFormsModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule
     
     
   ],

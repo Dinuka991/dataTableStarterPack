@@ -2,8 +2,6 @@
     <mat-card-header>
       <mat-card-title>Shiba Inu</mat-card-title>
     </mat-card-header>
- 
-    
     <mat-card-content>
         <form [formGroup]="profileForm">
             <div  fxLayout.sm="column" fxLayout.xs="column"  fxLayout="row" fxLayoutAlign="space-around center" >
@@ -23,8 +21,11 @@
                     </mat-form-field>  
                     
                     <div>
-                         <button mat-stroked-button color="primary" >Search</button>
+                         <button mat-stroked-button color="primary" >Search</button>&nbsp;	
+                         <button (click)="downloadExel()" mat-stroked-button color="primary" >Download</button>
                     </div>
+
+                    
           </div>
        </form>
       </mat-card-content>  
