@@ -14,7 +14,7 @@ import {  MatPaginator  } from '@angular/material/paginator';
 })
 export class EmployeeDetailsComponent implements OnInit {
 
-  displayedColumns: string[] = [  'employeeId', 'employeeName' , 'employeeMobile' , 'employeeEmail' , 'employeeDate'];
+  displayedColumns: string[] = [  'employeeId', 'employeeName' , 'employeeMobile' , 'employeeEmail' , 'employeeDate' , 'action'];
   dataSource = new MatTableDataSource<Employee>();
 
 
@@ -59,6 +59,10 @@ export class EmployeeDetailsComponent implements OnInit {
          console.log(data);
        }
      )
+   }
+   loadAppointment(e: any){
+     console.log(e);
+
    }
 
 }
