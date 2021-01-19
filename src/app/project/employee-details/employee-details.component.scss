@@ -1,7 +1,16 @@
 
+
   .mat-table {
+    box-shadow: none;
     width: 100%;
     table-layout: fixed;
     word-break: break-word;
   }
   
+  .mat-header-cell {
+    font-size: 14px !important;
+    background-color: rgb(205, 118, 240);
+    padding-right: 10px;
+  }
+  
+ 
