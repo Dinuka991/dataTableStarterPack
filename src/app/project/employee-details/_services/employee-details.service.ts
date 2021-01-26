@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient , HttpParams} from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Employee } from '../_models/Employee';
 
@@ -14,9 +14,17 @@ export class EmployeeDetailsService {
     return this.http.get<any>('http://localhost:8080/employee-services/download/employee.xlsx' ,   {responseType: 'blob' as 'json'});
   }
 
-  getAllData(): Observable<Employee>{
-    return this.http.get<Employee>('http://localhost:8080/employee-services/all');
+  getAllData(obj: any ,_first: any ,_maxResult: any ): Observable<Employee>{
+    
+    let httpParam = new HttpParams().set('first',_first)
+                                    .set('maxResult',_maxResult)
+                                    .set('employeeId', obj.employeeId )
+                                    .set('employeeName' , obj.employeeName)
+                                    .set('employeeMobile', obj.employeeMobile);
+
+    return this.http.get<Employee>('http://localhost:8080/employee-services/search?' + httpParam);
   }
-      
+    
+  
 
 }

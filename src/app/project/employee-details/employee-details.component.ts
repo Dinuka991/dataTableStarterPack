@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup , FormBuilder , FormControl } from '@angular/forms'
+import {  FormBuilder  } from '@angular/forms'
 import { EmployeeDetailsService } from './_services/employee-details.service';
 import { saveAs } from 'file-saver';
 import { Employee } from './_models/Employee';
@@ -16,17 +16,21 @@ export class EmployeeDetailsComponent implements OnInit {
 
   displayedColumns: string[] = [  'employeeId', 'employeeName' , 'employeeMobile' , 'employeeEmail' , 'employeeDate' , 'action'];
   dataSource = new MatTableDataSource<Employee>();
-
-
+ 
   @ViewChild(MatPaginator, { static: true })
   paginator!: MatPaginator;
+  firstVal: any;
+  maxResult: any;
+  totalCount: any;
 
  
   constructor(private fb: FormBuilder , private employeeDetailsService: EmployeeDetailsService) { }
 
   ngOnInit(): void {
   
-      this.dataSource.paginator = this.paginator;
+    
+    
+
     
   }
  
@@ -51,15 +55,22 @@ export class EmployeeDetailsComponent implements OnInit {
     )
   }
 
-   getAllData(){
-     this.employeeDetailsService.getAllData().subscribe(
+   getAllData(form: any  ){
+    
+    this.firstVal  = this.paginator.pageIndex + '' ;
+    this.maxResult = this.paginator.pageSize + '';
+    console.log(  this.firstVal);
+    console.log(   this.maxResult );
+     this.employeeDetailsService.getAllData(form.value , this.firstVal , this.maxResult).subscribe(
        (data:any) => {
 
-         this.dataSource.data = data;
-         console.log(data);
+         this.dataSource.data = data.content;
+         this.totalCount  = data.totalElements;
+         console.log( this.totalCount);
        }
      )
    }
+
    loadAppointment(e: any){
      console.log(e);
 
