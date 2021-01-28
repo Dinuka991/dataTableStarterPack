@@ -12,7 +12,8 @@ import { HttpClientModule } from '@angular/common/http'
 import { MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
-
+import { EffectsModule, USER_PROVIDED_EFFECTS } from '@ngrx/effects';
+import { EmployeeEffects } from '../_effects/employee.effects';
 
 
 @NgModule({
@@ -30,10 +31,16 @@ import {MatIconModule} from '@angular/material/icon';
     HttpClientModule,
     MatTableModule,
     MatPaginatorModule,
-    MatIconModule
+    MatIconModule,
+    EffectsModule.forRoot([EmployeeEffects])
     
     
   ],
-  providers: [EmployeeDetailsService]
+  providers: [EmployeeDetailsService , EmployeeEffects,
+    {
+      provide: USER_PROVIDED_EFFECTS,
+      multi: true,
+      useValue: [EmployeeEffects],
+    },]
 })
 export class EmployeeDetailsModule { }

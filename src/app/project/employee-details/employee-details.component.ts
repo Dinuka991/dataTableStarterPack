@@ -6,6 +6,8 @@ import { Employee } from './_models/Employee';
 import {  ViewChild} from '@angular/core';
 import { MatTableDataSource   } from '@angular/material/table';
 import {  MatPaginator  } from '@angular/material/paginator';
+import { Store  } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-employee-details',
@@ -13,6 +15,9 @@ import {  MatPaginator  } from '@angular/material/paginator';
   styleUrls: ['./employee-details.component.scss']
 })
 export class EmployeeDetailsComponent implements OnInit {
+
+  
+  employees$: Observable<Employee[]> = this.store.select(state => state.employees);
 
   displayedColumns: string[] = [  'employeeId', 'employeeName' , 'employeeMobile' , 'employeeEmail' , 'employeeDate' , 'action'];
   dataSource = new MatTableDataSource<Employee>();
@@ -24,14 +29,12 @@ export class EmployeeDetailsComponent implements OnInit {
   totalCount: any;
 
  
-  constructor(private fb: FormBuilder , private employeeDetailsService: EmployeeDetailsService) { }
+  constructor(private fb: FormBuilder , private employeeDetailsService: EmployeeDetailsService , private store: Store<{ employees: Employee[] }>) { }
 
   ngOnInit(): void {
-  
-    
-    
 
-    
+   
+     this.getAll();
   }
  
   profileForm = this.fb.group({
@@ -59,8 +62,7 @@ export class EmployeeDetailsComponent implements OnInit {
     
     this.firstVal  = this.paginator.pageIndex + '' ;
     this.maxResult = this.paginator.pageSize + '';
-    console.log(  this.firstVal);
-    console.log(   this.maxResult );
+    
      this.employeeDetailsService.getAllData(form.value , this.firstVal , this.maxResult).subscribe(
        (data:any) => {
 
@@ -73,6 +75,11 @@ export class EmployeeDetailsComponent implements OnInit {
 
    loadAppointment(e: any){
      console.log(e);
+
+   }
+   getAll(){
+     console.log('get All')
+    this.store.dispatch({ type: '[Employees Page] Load Employee' });
 
    }
 

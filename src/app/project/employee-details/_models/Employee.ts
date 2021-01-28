@@ -1,4 +1,6 @@
 export interface Employee{
+    content: any;
+    data: any;
     
     employeeId: number;
     employeeName: string;

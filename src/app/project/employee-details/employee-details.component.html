@@ -29,6 +29,9 @@
                     
           </div>
        </form>
+       <div *ngFor="let movie of employees$ | async">
+        {{ movie.employeeName }}
+      </div>
     
      
       </mat-card-content>  
