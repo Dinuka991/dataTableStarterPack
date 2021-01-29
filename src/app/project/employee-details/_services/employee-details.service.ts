@@ -25,6 +25,7 @@ export class EmployeeDetailsService {
     return this.http.get<Employee>('http://localhost:8080/employee-services/search?' + httpParam);
   }
 
+  // to test ngrx 
   getAll() {
     return this.http.get<Employee>('http://localhost:8080/employee-services/search?first=0&maxResult=10');
   }

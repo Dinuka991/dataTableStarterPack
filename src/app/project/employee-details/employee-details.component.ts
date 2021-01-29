@@ -77,6 +77,7 @@ export class EmployeeDetailsComponent implements OnInit {
      console.log(e);
 
    }
+   //to test ngrx
    getAll(){
      console.log('get All')
     this.store.dispatch({ type: '[Employees Page] Load Employee' });
