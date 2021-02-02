@@ -14,11 +14,14 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
 import { EffectsModule, USER_PROVIDED_EFFECTS } from '@ngrx/effects';
 import { EmployeeEffects } from '../_effects/employee.effects';
+import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { EmployeeUpdateComponent } from '../employee-update/employee-update.component';
 
 
 @NgModule({
   declarations: [
-    EmployeeDetailsComponent
+    EmployeeDetailsComponent,
+    EmployeeUpdateComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +35,7 @@ import { EmployeeEffects } from '../_effects/employee.effects';
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
+    MatDialogModule,
     EffectsModule.forRoot([EmployeeEffects])
     
     
@@ -41,6 +45,8 @@ import { EmployeeEffects } from '../_effects/employee.effects';
       provide: USER_PROVIDED_EFFECTS,
       multi: true,
       useValue: [EmployeeEffects],
-    },]
+    },
+    { provide: MAT_DIALOG_DATA , useValue: {}},
+    { provide: MatDialogRef , useValue: {}},]
 })
 export class EmployeeDetailsModule { }

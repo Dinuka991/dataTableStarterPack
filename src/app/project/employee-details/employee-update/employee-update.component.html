@@ -1,1 +1,45 @@
-<p>employee-update works!</p>
+<section>
+    <mat-card  class="search-card">
+        <mat-card-header>
+          <mat-card-title>Employee Search</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="profileForm" (ngSubmit)=submit(profileForm)>
+                <div   fxLayout="column" fxLayoutAlign="space-around center" >
+                        <mat-form-field appearance="outline">
+                            <mat-label>Employee ID</mat-label>
+                            <input readonly matInput formControlName="employeeId">
+                        </mat-form-field>    
+                  
+    
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Employee Name</mat-label>
+                            <input matInput formControlName="employeeName">
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline">
+                            <mat-label>Mobile Number</mat-label>
+                            <input matInput formControlName="employeeMobile">
+                        </mat-form-field>  
+
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Employee Email</mat-label>
+                            <input matInput formControlName="employeeEmail">
+                        </mat-form-field>  
+
+                        <mat-form-field appearance="outline">
+                            <mat-label> Department</mat-label>
+                            <input matInput formControlName="departmentName">
+                        </mat-form-field>  
+                        
+                        <div>
+                             <button type="submit" mat-stroked-button color="primary" >Search</button>&nbsp;	
+                           
+                        </div>
+              </div>
+           </form> 
+          </mat-card-content>  
+      </mat-card>
+      
+      </section>

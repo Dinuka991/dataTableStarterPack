@@ -26,7 +26,7 @@ export class EmployeeDetailsService {
   }
 
   getAll() {
-    return this.http.get<Employee>('http://localhost:8080/employee-services/search?first=0&maxResult=10');
+    return this.http.get<Employee>('http://localhost:8080/employee-services/all');
   }
     
   
