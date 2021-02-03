@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {  FormBuilder  } from '@angular/forms'
 import { EmployeeDetailsService } from './_services/employee-details.service';
 import { saveAs } from 'file-saver';
@@ -8,6 +8,8 @@ import { MatTableDataSource   } from '@angular/material/table';
 import {  MatPaginator  } from '@angular/material/paginator';
 import { Store  } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { EmployeeUpdateComponent } from './employee-update/employee-update.component';
+import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-employee-details',
@@ -19,7 +21,7 @@ export class EmployeeDetailsComponent implements OnInit {
   
   employees$: Observable<Employee[]> = this.store.select(state => state.employees);
 
-  displayedColumns: string[] = [  'employeeId', 'employeeName' , 'employeeMobile' , 'employeeEmail' , 'employeeDate' , 'action'];
+  displayedColumns: string[] = [  'employeeId', 'employeeName' , 'employeeMobile' , 'employeeEmail' , 'employeeDate' , 'line1' , 'city' , 'country' , 'action'];
   dataSource = new MatTableDataSource<Employee>();
  
   @ViewChild(MatPaginator, { static: true })
@@ -29,7 +31,10 @@ export class EmployeeDetailsComponent implements OnInit {
   totalCount: any;
 
  
-  constructor(private fb: FormBuilder , private employeeDetailsService: EmployeeDetailsService , private store: Store<{ employees: Employee[] }>) { }
+  constructor(private fb: FormBuilder , private employeeDetailsService: EmployeeDetailsService ,
+                          public dialog: MatDialog ,
+                          @Inject(MAT_DIALOG_DATA) public message: any,
+                          private store: Store<{ employees: Employee[] }>) { }
 
   ngOnInit(): void {
 
@@ -73,15 +78,53 @@ export class EmployeeDetailsComponent implements OnInit {
      )
    }
 
-   loadAppointment(e: any){
-     console.log(e);
+    loadAppointment(e: any){
+        console.log(e);
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.panelClass = 'custom-dialog-container';
+        dialogConfig.data = {
+          formData: e,
+   
+    };
+    //dialogConfig.width =  '90%';
+    const dialogRef  = this.dialog.open(EmployeeUpdateComponent , dialogConfig);
 
+
+      dialogRef.afterClosed().subscribe(
+          data => console.log("Dialog output:", data)
+      );    
+
+    }
+   //With Effects
    }
    //to test ngrx
+
    getAll(){
      console.log('get All')
     this.store.dispatch({ type: '[Employees Page] Load Employee' });
 
+   }
+
+   //with rxjs
+
+
+   getAlld(form: any  ){
+    
+    this.firstVal  = this.paginator.pageIndex + '' ;
+    this.maxResult = this.paginator.pageSize + '';
+    
+     this.employeeDetailsService.getAll().subscribe(
+       (data:any) => {
+
+      //  const filteredData = data.filter((d: { line1: any; city: any; country: any  }) => d.line1 = d.line1 + ' ' + d.city + ' ' + d.country)   
+       // this.dataSource = new MatTableDataSource(filteredData);
+         this.dataSource = data;
+         this.totalCount  = data.totalElements;
+         console.log( this.totalCount);
+       }
+     )
    }
 
 }

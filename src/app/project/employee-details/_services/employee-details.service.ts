@@ -27,7 +27,11 @@ export class EmployeeDetailsService {
 
   // to test ngrx 
   getAll() {
-    return this.http.get<Employee>('http://localhost:8080/employee-services/search?first=0&maxResult=10');
+    return this.http.get<Employee>('http://localhost:8080/employee-services/all');
+  }
+
+  updateEmployee(obj: Employee):Observable<Employee>{
+    return this.http.post<Employee>('http://localhost:8080/employee-services/add' , obj);
   }
     
   

@@ -13,8 +13,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    EmployeeUpdateComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,

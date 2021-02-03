@@ -1,1 +1,65 @@
-<p>employee-update works!</p>
+<section>
+    <mat-card  >
+        <mat-card-header>
+          <mat-card-title>Employee Search</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+         
+                <form [formGroup]="profileForm" (ngSubmit)=updateEmployee(profileForm)>
+                <div   fxLayout="column"   >
+                        <mat-form-field appearance="outline">
+                            <mat-label>Employee ID</mat-label>
+                            <input readonly matInput formControlName="employeeId">
+                        </mat-form-field>    
+                  
+    
+                        <mat-form-field appearance="outline" >
+                            <mat-label>Employee Name</mat-label>
+                            <input matInput formControlName="employeeName">
+                        </mat-form-field>
+    
+                        <mat-form-field appearance="outline">
+                            <mat-label>Mobile Number</mat-label>
+                            <input matInput formControlName="employeeMobile">
+                        </mat-form-field>  
+
+                        <div   formGroupName="address"  fxLayout.sm="column" fxLayout.xs="column"  fxLayout="row"     fxLayoutGap="10px"  >
+                        
+                                    <mat-form-field appearance="outline"  >
+                                        <mat-label>Address </mat-label>
+                                        <input  matInput formControlName="line1">
+                                    </mat-form-field>    
+                               
+                                    <mat-form-field appearance="outline" >
+                                        <mat-label>City</mat-label>
+                                        <input matInput formControlName="city">
+                                    </mat-form-field>
+                                 
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Country</mat-label>
+                                        <input matInput formControlName="country">
+                                    </mat-form-field>  
+                               
+                        </div>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Employee Email</mat-label>
+                            <input matInput formControlName="employeeEmail">
+                        </mat-form-field>  
+
+                        <mat-form-field appearance="outline">
+                            <mat-label> Department</mat-label>
+                            <input matInput formControlName="departmentName">
+                        </mat-form-field>  
+                        <div> 
+                             <button type="submit"  mat-stroked-button color="primary" >Search</button>&nbsp;	
+                             <button  (click) = "closeDialog()"  mat-stroked-button color="primary" >Close</button>&nbsp;	
+                    	</div>
+                             
+                      
+              </div>
+           </form> 
+          </mat-card-content>  
+      </mat-card>
+      
+      </section>

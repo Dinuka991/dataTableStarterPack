@@ -4,8 +4,8 @@
       <mat-card-title>Employee Search</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <form [formGroup]="profileForm" (ngSubmit)=getAllData(profileForm)>
-            <div  fxLayout.sm="column" fxLayout.xs="column"  fxLayout="row" fxLayoutAlign="space-around center" >
+        <form [formGroup]="profileForm" (ngSubmit)=getAlld(profileForm)>
+            <div fxFill  fxLayout.sm="column" fxLayout.xs="column"  fxLayout="row" fxLayoutAlign="space-around center" >
                     <mat-form-field appearance="outline">
                         <mat-label>Employee ID</mat-label>
                         <input matInput formControlName="employeeId">
@@ -71,7 +71,23 @@
           <th mat-header-cell *matHeaderCellDef> Date </th>
           <td mat-cell *matCellDef="let element"> {{element.employeeDate}} </td>
         </ng-container>
-        
+
+        <ng-container matColumnDef="line1">
+          <th mat-header-cell *matHeaderCellDef> Address </th>
+          <td mat-cell *matCellDef="let element"> {{element.line1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="city">
+          <th mat-header-cell *matHeaderCellDef> City </th>
+          <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="country">
+          <th mat-header-cell *matHeaderCellDef> Country </th>
+          <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+        </ng-container>
+
+
         <ng-container matColumnDef="action" >
           <th mat-header-cell *matHeaderCellDef> Edit </th>
           <td mat-cell *matCellDef="let element">
