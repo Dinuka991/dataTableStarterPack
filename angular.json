@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "dataTableStarterPack"
+  "defaultProject": "dataTableStarterPack",
+  "cli": {
+    "analytics": "89cf7d5d-1f98-4789-89f9-8e048f5c262d"
+  }
 }
