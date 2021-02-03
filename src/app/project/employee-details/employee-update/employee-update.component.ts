@@ -41,9 +41,10 @@ export class EmployeeUpdateComponent implements OnInit , OnDestroy{
     employeeMobile: [''],
     employeeEmail: [''],
     departmentName: [''],
-    line1:[''],
-    city:[''],
-    country:['']
+    address: this.fb.group  ({  line1:[''],
+                city:[''],
+                country:['']
+              })
   })
 
   submit(form: any){
@@ -63,9 +64,12 @@ patchValue() {
     employeeMobile: this.message['formData'].employeeMobile,
     employeeEmail: this.message['formData'].employeeEmail,
     employeeDepartment: this.message['formData'].departmentName,
-    line1: this.message['formData'].line1,
-    city: this.message['formData'].city,
-    country: this.message['formData'].country
+ 
+    address: {
+      line1: this.message['formData'].line1,
+      city: this.message['formData'].city,
+      country: this.message['formData'].country
+    }
   
     
   })
@@ -74,7 +78,7 @@ patchValue() {
 updateEmployee(form: any){
 
   console.log('ss');
-
+  console.log(form)
    
    this.employeeService.updateEmployee(form.value)
                                              .subscribe( (data) =>{
