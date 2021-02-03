@@ -21,7 +21,7 @@ export class EmployeeDetailsComponent implements OnInit {
   
   employees$: Observable<Employee[]> = this.store.select(state => state.employees);
 
-  displayedColumns: string[] = [  'employeeId', 'employeeName' , 'employeeMobile' , 'employeeEmail' , 'employeeDate' , 'action'];
+  displayedColumns: string[] = [  'employeeId', 'employeeName' , 'employeeMobile' , 'employeeEmail' , 'employeeDate' , 'line1' , 'city' , 'country' , 'action'];
   dataSource = new MatTableDataSource<Employee>();
  
   @ViewChild(MatPaginator, { static: true })
@@ -88,7 +88,7 @@ export class EmployeeDetailsComponent implements OnInit {
           formData: e,
    
     };
-    dialogConfig.width =  '90%';
+    //dialogConfig.width =  '90%';
     const dialogRef  = this.dialog.open(EmployeeUpdateComponent , dialogConfig);
 
       dialogRef.afterClosed().subscribe(
@@ -114,7 +114,9 @@ export class EmployeeDetailsComponent implements OnInit {
      this.employeeDetailsService.getAll().subscribe(
        (data:any) => {
 
-         this.dataSource.data = data;
+      //  const filteredData = data.filter((d: { line1: any; city: any; country: any  }) => d.line1 = d.line1 + ' ' + d.city + ' ' + d.country)   
+       // this.dataSource = new MatTableDataSource(filteredData);
+         this.dataSource = data;
          this.totalCount  = data.totalElements;
          console.log( this.totalCount);
        }
