@@ -17,6 +17,7 @@ import { EmployeeEffects } from '../_effects/employee.effects';
 import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { EmployeeUpdateComponent } from '../employee-update/employee-update.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatIconModule,
     MatDialogModule,
     MatSelectModule,
+    MatAutocompleteModule,
     EffectsModule.forRoot([EmployeeEffects])
     
     

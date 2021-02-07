@@ -3,6 +3,7 @@ import { HttpClient , HttpParams} from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Employee } from '../_models/Employee';
 import { Department } from '../_models/Department';
+import { Country } from '../_models/Country';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,10 @@ export class EmployeeDetailsService {
     
   getDepartmentList():Observable<Department>{
     return this.http.get<Department>('http://localhost:8080/department-service/getAllDep');
+  }
+
+  getCountryList():Observable<Country>{
+    return this.http.get<Country>('http://localhost:8080/employee-services/countries');
   }
 
 }

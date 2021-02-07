@@ -1,9 +1,9 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder } from '@angular/forms'
+import { FormBuilder, NgModel } from '@angular/forms'
 import { EmployeeDetailsService } from '../_services/employee-details.service';
-import { takeUntil } from 'rxjs/operators';
-import { observable, Subject, Subscription } from 'rxjs';
+import { map, startWith, takeUntil } from 'rxjs/operators';
+import { Observable, observable, Subject, Subscription } from 'rxjs';
 import { Department } from '../_models/Department';
 
 @Component({
@@ -15,6 +15,13 @@ export class EmployeeUpdateComponent implements OnInit , OnDestroy{
 
   private ubsubscribe$ = new Subject<void>();
   departments!: any;
+
+
+  options: any;
+  filteredOptions: any;
+
+  @ViewChild('filterInout', { static: true })
+  filterInout!: NgModel;
 
   constructor( private fb: FormBuilder,
               private  employeeService: EmployeeDetailsService,
@@ -35,6 +42,20 @@ export class EmployeeUpdateComponent implements OnInit , OnDestroy{
     this.patchValue();
     this.getDepartmentList();
   
+
+
+    this.filteredOptions = this.profileForm.controls['address'].valueChanges.pipe(
+     
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter((option: string | string[]) => option.indexOf(filterValue) === 0);
   }
 
   profileForm = this.fb.group({
@@ -96,6 +117,17 @@ getDepartmentList(){
                                             this.departments = data;
                                           } )
 }
+
+getCountryList(){
+  this.employeeService.getCountryList().pipe(takeUntil(this.ubsubscribe$))
+                                          .subscribe ( (data) => {
+                                        //   const filteredData = data.filter((d: { line1: any; city: any; country: any  }) => d.line1 = d.line1 + ' ' + d.city + ' ' + d.country)   
+
+
+                                            this.options = data; 
+                                          })
+}
+
 
 
 

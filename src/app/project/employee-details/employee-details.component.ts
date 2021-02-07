@@ -86,7 +86,7 @@ export class EmployeeDetailsComponent implements OnInit {
     this.employeeDetailsService.getAll().subscribe(
       (data:any) => {
 
-     //  const filteredData = data.filter((d: { line1: any; city: any; country: any  }) => d.line1 = d.line1 + ' ' + d.city + ' ' + d.country)   
+     // const filteredData = data.filter((d: { line1: any; city: any; country: any  }) => d.line1 = d.line1 + ' ' + d.city + ' ' + d.country)   
       // this.dataSource = new MatTableDataSource(filteredData);
         this.dataSource = data;
         this.totalCount  = data.totalElements;
