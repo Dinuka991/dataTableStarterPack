@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms'
 import { EmployeeDetailsService } from '../_services/employee-details.service';
 import { takeUntil } from 'rxjs/operators';
 import { observable, Subject, Subscription } from 'rxjs';
+import { Department } from '../_models/Department';
 
 @Component({
   selector: 'app-employee-update',
@@ -13,6 +14,7 @@ import { observable, Subject, Subscription } from 'rxjs';
 export class EmployeeUpdateComponent implements OnInit , OnDestroy{
 
   private ubsubscribe$ = new Subject<void>();
+  departments!: any;
 
   constructor( private fb: FormBuilder,
               private  employeeService: EmployeeDetailsService,
@@ -31,6 +33,7 @@ export class EmployeeUpdateComponent implements OnInit , OnDestroy{
   ngOnInit(): void {
     console.log('ss')
     this.patchValue();
+    this.getDepartmentList();
   
   }
 
@@ -86,6 +89,14 @@ updateEmployee(form: any){
                                              })
 
 }
+
+getDepartmentList(){
+  this.employeeService.getDepartmentList().pipe(takeUntil(this.ubsubscribe$))
+                                          .subscribe( (data) => {
+                                            this.departments = data;
+                                          } )
+}
+
 
 
 }

@@ -47,10 +47,21 @@
                             <input matInput formControlName="employeeEmail">
                         </mat-form-field>  
 
-                        <mat-form-field appearance="outline">
-                            <mat-label> Department</mat-label>
-                            <input matInput formControlName="departmentName">
-                        </mat-form-field>  
+              
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Department</mat-label>
+                            <mat-select formControlName="departmentName" required>
+                              <mat-option>--</mat-option>
+                              <mat-option *ngFor="let item of departments" [value]="item">
+                                {{item.departmentName}}
+                              </mat-option>
+                            </mat-select>
+                         
+                          </mat-form-field>
+
+                        
+
                         <div> 
                              <button type="submit"  mat-stroked-button color="primary" >Search</button>&nbsp;	
                              <button  (click) = "closeDialog()"  mat-stroked-button color="primary" >Close</button>&nbsp;	

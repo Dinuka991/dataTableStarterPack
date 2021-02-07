@@ -16,6 +16,7 @@ import { EffectsModule, USER_PROVIDED_EFFECTS } from '@ngrx/effects';
 import { EmployeeEffects } from '../_effects/employee.effects';
 import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { EmployeeUpdateComponent } from '../employee-update/employee-update.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { EmployeeUpdateComponent } from '../employee-update/employee-update.comp
     MatPaginatorModule,
     MatIconModule,
     MatDialogModule,
+    MatSelectModule,
     EffectsModule.forRoot([EmployeeEffects])
     
     

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient , HttpParams} from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Employee } from '../_models/Employee';
+import { Department } from '../_models/Department';
 
 @Injectable({
   providedIn: 'root'
@@ -31,9 +32,11 @@ export class EmployeeDetailsService {
   }
 
   updateEmployee(obj: Employee):Observable<Employee>{
-    return this.http.post<Employee>('http://localhost:8080/employee-services/add' , obj);
+    return this.http.put<Employee>('http://localhost:8080/employee-services/add' , obj);
   }
     
-  
+  getDepartmentList():Observable<Department>{
+    return this.http.get<Department>('http://localhost:8080/department-service/getAllDep');
+  }
 
 }
