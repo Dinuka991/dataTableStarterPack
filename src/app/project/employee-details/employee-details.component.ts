@@ -38,7 +38,6 @@ export class EmployeeDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-   
      this.getAll();
   }
  
@@ -78,6 +77,25 @@ export class EmployeeDetailsComponent implements OnInit {
      )
    }
 
+   getAlld(form: any  ){
+    
+    
+    this.firstVal  = this.paginator.pageIndex + ''  ;
+   this.maxResult = this.paginator.pageSize + '';
+   
+    this.employeeDetailsService.getAll().subscribe(
+      (data:any) => {
+
+     //  const filteredData = data.filter((d: { line1: any; city: any; country: any  }) => d.line1 = d.line1 + ' ' + d.city + ' ' + d.country)   
+      // this.dataSource = new MatTableDataSource(filteredData);
+        this.dataSource = data;
+        this.totalCount  = data.totalElements;
+        console.log( this.totalCount);
+      }
+    )
+  }
+
+
     loadAppointment(e: any){
         console.log(e);
         const dialogConfig = new MatDialogConfig();
@@ -98,7 +116,7 @@ export class EmployeeDetailsComponent implements OnInit {
 
     }
    //With Effects
-   }
+   
    //to test ngrx
 
    getAll(){
@@ -110,21 +128,5 @@ export class EmployeeDetailsComponent implements OnInit {
    //with rxjs
 
 
-   getAlld(form: any  ){
-    
-    this.firstVal  = this.paginator.pageIndex + '' ;
-    this.maxResult = this.paginator.pageSize + '';
-    
-     this.employeeDetailsService.getAll().subscribe(
-       (data:any) => {
-
-      //  const filteredData = data.filter((d: { line1: any; city: any; country: any  }) => d.line1 = d.line1 + ' ' + d.city + ' ' + d.country)   
-       // this.dataSource = new MatTableDataSource(filteredData);
-         this.dataSource = data;
-         this.totalCount  = data.totalElements;
-         console.log( this.totalCount);
-       }
-     )
-   }
 
 }
