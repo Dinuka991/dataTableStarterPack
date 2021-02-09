@@ -5,6 +5,7 @@ import { EmployeeDetailsService } from '../_services/employee-details.service';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 import { Observable, observable, Subject, Subscription } from 'rxjs';
 import { Department } from '../_models/Department';
+import { Country } from '../_models/Country';
 
 @Component({
   selector: 'app-employee-update',
@@ -17,11 +18,14 @@ export class EmployeeUpdateComponent implements OnInit , OnDestroy{
   departments!: any;
 
 
-  options: any;
-  filteredOptions: any;
+  
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredOptions!: Observable<string[]>;
 
   @ViewChild('filterInout', { static: true })
   filterInout!: NgModel;
+
+  countryArray: string[] =[];
 
   constructor( private fb: FormBuilder,
               private  employeeService: EmployeeDetailsService,
@@ -41,21 +45,27 @@ export class EmployeeUpdateComponent implements OnInit , OnDestroy{
     console.log('ss')
     this.patchValue();
     this.getDepartmentList();
+    this.getCountryList();
   
 
 
-    this.filteredOptions = this.profileForm.controls['address'].valueChanges.pipe(
+     
+
+    this.filteredOptions = this.profileForm.controls['country'].valueChanges.pipe(
      
       startWith(''),
       map(value => this._filter(value))
     );
+
+    
   
   }
+
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter((option: string | string[]) => option.indexOf(filterValue) === 0);
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
   profileForm = this.fb.group({
@@ -65,9 +75,12 @@ export class EmployeeUpdateComponent implements OnInit , OnDestroy{
     employeeMobile: [''],
     employeeEmail: [''],
     departmentName: [''],
-    address: this.fb.group  ({  line1:[''],
+    
+    address: this.fb.group  ({  
+                line1:[''],
                 city:[''],
                 country:['']
+             
               })
   })
 
@@ -118,15 +131,25 @@ getDepartmentList(){
                                           } )
 }
 
-getCountryList(){
-  this.employeeService.getCountryList().pipe(takeUntil(this.ubsubscribe$))
-                                          .subscribe ( (data) => {
-                                        //   const filteredData = data.filter((d: { line1: any; city: any; country: any  }) => d.line1 = d.line1 + ' ' + d.city + ' ' + d.country)   
+getCountryList(): any {
+  this.employeeService.getCountryList().subscribe( (data) => {
+          data.forEach((item: { countryName: any; }) => {
+   
+ 
+      this.countryArray.push(item.countryName);
+    
 
+  });
 
-                                            this.options = data; 
-                                          })
+  
+
+  } 
+  )
+    //this.options = this.countryArray;                                  
+  console.log(this.options)                            
+                                          
 }
+
 
 
 

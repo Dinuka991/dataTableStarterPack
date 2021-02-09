@@ -40,8 +40,8 @@ export class EmployeeDetailsService {
     return this.http.get<Department>('http://localhost:8080/department-service/getAllDep');
   }
 
-  getCountryList():Observable<Country>{
-    return this.http.get<Country>('http://localhost:8080/employee-services/countries');
+  getCountryList():Observable<any>{
+    return this.http.get<any>('http://localhost:8080/employee-services/countries');
   }
 
 }
