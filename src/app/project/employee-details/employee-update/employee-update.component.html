@@ -7,11 +7,15 @@
          
                 <form [formGroup]="profileForm" (ngSubmit)=updateEmployee(profileForm)>
                 <div   fxLayout="column"   >
-                        <mat-form-field appearance="outline">
+                        <mat-form-field   *ngIf="this.message['updateEmployee']" appearance="outline">
                             <mat-label>Employee ID</mat-label>
                             <input readonly matInput formControlName="employeeId">
                         </mat-form-field>    
-                  
+                      
+                        <mat-form-field   *ngIf="!this.message['updateEmployee']" appearance="outline">
+                          <mat-label>Employee ID</mat-label>
+                          <input  matInput formControlName="employeeId">
+                      </mat-form-field>   
     
                         <mat-form-field appearance="outline" >
                             <mat-label>Employee Name</mat-label>
@@ -82,7 +86,7 @@
                         
 
                         <div> 
-                             <button type="submit"  mat-stroked-button color="primary" >Search</button>&nbsp;	
+                             <button type="submit"  mat-stroked-button color="primary" >Submit</button>&nbsp;	
                              <button  (click) = "closeDialog()"  mat-stroked-button color="primary" >Close</button>&nbsp;	
                     	</div>
                              
