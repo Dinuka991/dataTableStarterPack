@@ -104,6 +104,7 @@ export class EmployeeDetailsComponent implements OnInit {
         dialogConfig.panelClass = 'custom-dialog-container';
         dialogConfig.data = {
           formData: e,
+          updateEmployee: true
    
     };
     //dialogConfig.width =  '90%';
@@ -124,6 +125,24 @@ export class EmployeeDetailsComponent implements OnInit {
     this.store.dispatch({ type: '[Employees Page] Load Employee' });
 
    }
+
+ 
+   addEmployee(){
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.panelClass = 'custom-dialog-container';
+    dialogConfig.data = {};
+//dialogConfig.width =  '90%';
+const dialogRef  = this.dialog.open(EmployeeUpdateComponent , dialogConfig);
+
+
+  dialogRef.afterClosed().subscribe(
+      data => console.log("Dialog output:", data)
+  );    
+
+}
 
    //with rxjs
 

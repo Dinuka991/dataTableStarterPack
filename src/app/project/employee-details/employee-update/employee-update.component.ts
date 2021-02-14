@@ -43,7 +43,8 @@ export class EmployeeUpdateComponent implements OnInit , OnDestroy{
 
   ngOnInit(): void {
     console.log('ss')
-    this.patchValue();
+
+    if(this.message['updateEmployee']){this.patchValue()};
     this.getDepartmentList();
     this.getCountryList();
   
@@ -51,7 +52,7 @@ export class EmployeeUpdateComponent implements OnInit , OnDestroy{
 
      
 
-    this.filteredOptions = this.profileForm.controls['country'].valueChanges.pipe(
+    this.filteredOptions = this.profileForm.get('address.countryArray')!.valueChanges.pipe(
      
       startWith(''),
       map(value => this._filter(value))
@@ -79,7 +80,7 @@ export class EmployeeUpdateComponent implements OnInit , OnDestroy{
     address: this.fb.group  ({  
                 line1:[''],
                 city:[''],
-                country:['']
+                countryArray:['']
              
               })
   })
@@ -105,7 +106,7 @@ patchValue() {
     address: {
       line1: this.message['formData'].line1,
       city: this.message['formData'].city,
-      country: this.message['formData'].country
+      countryArray: this.message['formData'].countryArray
     }
   
     
@@ -137,15 +138,15 @@ getCountryList(): any {
    
  
       this.countryArray.push(item.countryName);
-    
+     
 
   });
 
-  
-
+  //console.log( this.countryArray);
+    //this.options = ['dd' , 'ss'];
   } 
   )
-    //this.options = this.countryArray;                                  
+  this.options = this.countryArray;                                  
   console.log(this.options)                            
                                           
 }

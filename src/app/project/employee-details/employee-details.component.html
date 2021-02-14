@@ -22,6 +22,7 @@
                     </mat-form-field>  
                     
                     <div>
+                         <button  type="button" (click)="addEmployee()" mat-stroked-button color="primary" >Add</button>&nbsp;	
                          <button type="submit" mat-stroked-button color="primary" >Search</button>&nbsp;	
                          <button (click)="downloadExel()" mat-stroked-button color="primary" >Download</button>
                     </div>
@@ -96,6 +97,8 @@
             </button>
           </td>
         </ng-container>
+
+        
 
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -41,7 +41,7 @@
                                              placeholder="Pick one"
                                              aria-label="Number"
                                              matInput
-                                             formControlName="country"
+                                             formControlName="countryArray"
                                              [matAutocomplete]="auto">
                                       <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                                         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
